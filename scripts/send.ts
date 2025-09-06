@@ -91,6 +91,7 @@ async function main() {
     // get args
     const args = process.argv;
 
+    // First arg can be `junk`, `eval`, or `action`
     if (args[2] === "junk") {
         if (args[3] === undefined) {
             console.error("Process ID is required");
