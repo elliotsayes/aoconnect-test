@@ -11,12 +11,11 @@ async function message_verbose(message_args: Parameters<typeof message>[0]) {
     for (let j = 0; j < (message_args.tags?.length ?? 0); j++) {
         console.log(`    - ${message_args.tags![j].name}: ${message_args.tags![j].value}`);
     }
-    console.log(`  - Data: ${message_args.data}`);
     {
-        if ((message_args.data?.length ?? 0) > 100) {
-            console.log(`Data: ${message_args.data!.substring(0, 100)}...`)
+        if ((message_args.data?.length ?? 0) > 20) {
+            console.log(`  - Data: ${message_args.data!.substring(0, 20)}...`)
         } else {
-            console.log(`Data: ${message_args.data}`)
+            console.log(`  - Data: ${message_args.data}`)
         }
     }
     let messageId = await message(message_args);
