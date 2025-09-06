@@ -5,9 +5,7 @@
   "scripts": {
     "generate-test-wallet": "mkdir -p .secret && npx @permaweb/wallet > .secret/test_wallet.json",
     "spawn": "tsx scripts/spawn.ts",
-    "send_junk": "tsx scripts/send.ts junk",
-    "send_eval": "tsx scripts/send.ts eval",
-    "send_action": "tsx scripts/send.ts action",
+    "send": "tsx scripts/send.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
