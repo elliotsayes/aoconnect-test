@@ -1,5 +1,6 @@
 import fs from "fs";
-import { createSigner, message, result } from "@permaweb/aoconnect";
+import { createSigner } from "@permaweb/aoconnect";
+import { message, result } from "./legacy";
 
 // Read in the JWK from the file as a string
 const jwkStr = fs.readFileSync(".secret/test_wallet.json", "utf8");
