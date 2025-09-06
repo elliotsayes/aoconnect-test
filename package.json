@@ -10,5 +10,8 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@permaweb/aoconnect": "^0.0.90"
+  }
 }
