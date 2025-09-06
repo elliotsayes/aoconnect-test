@@ -6,8 +6,12 @@ const jwkStr = fs.readFileSync(".secret/test_wallet.json", "utf8");
 let jwk = JSON.parse(jwkStr);
 
 async function message_verbose(message_args: Parameters<typeof message>[0]) {
-    console.log(`Sending message to process ${message_args.process}`);
-    console.log(`Tags: ${message_args.tags?.map(tag => `${tag.name}: ${tag.value}`).join(", ")}`);
+    console.log(`Sending message to process ${message_args.process}...`);
+    console.log(`  - Tags (${message_args.tags?.length ?? 0})`);
+    for (let j = 0; j < (message_args.tags?.length ?? 0); j++) {
+        console.log(`    - ${message_args.tags![j].name}: ${message_args.tags![j].value}`);
+    }
+    console.log(`  - Data: ${message_args.data}`);
     {
         if ((message_args.data?.length ?? 0) > 100) {
             console.log(`Data: ${message_args.data!.substring(0, 100)}...`)
@@ -40,6 +44,7 @@ async function send_eval_file(processId: string, filePath: string) {
 }
 
 async function result_verbose(processId: string, messageId: string) {
+    console.log(`Getting result for message ${messageId} on process ${processId}...`);
     let resultData = await result({
         process: processId,
         message: messageId
@@ -48,11 +53,11 @@ async function result_verbose(processId: string, messageId: string) {
     console.log(`Result Output: ${resultData.Output}`);
     console.log(`Result Output.data: ${resultData.Output.data}`);
     console.log(`Result Output.prompt: ${resultData.Output.prompt}`);
-    console.log(`Result Messages (${resultData.Messages.length})`);
+    console.log(`Result Messages (${resultData.Messages.length}):`);
     // Print all messages by index with their tags
     for (let i = 0; i < resultData.Messages.length; i++) {
         let message = resultData.Messages[i];
-        console.log(`- Result Message[${i}]:`);
+        console.log(`- Message[${i}]:`);
         console.log(`  - Target ${message.Target}`);
         console.log(`  - Tags (${message.Tags.length})`);
         for (let j = 0; j < message.Tags.length; j++) {
