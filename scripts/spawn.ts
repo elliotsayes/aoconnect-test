@@ -10,7 +10,7 @@ let jwk = JSON.parse(jwk_str);
 const moduleId = "ISShJH1ij-hPPt9St5UFFr_8Ys3Kj5cyg7zrMGt7H9s";
 const schedulerId = "_GQ33BkPtZrqxA84vM8Zk-N2aO0toNNu_C-l-rawrBA";
 
-async function create() {
+async function create(name: string) {
     console.log(`Test jwk: ${jwk_str}`);
 
     // In node, `createSigner` take a JWK (JSON Web Key)
@@ -20,10 +20,21 @@ async function create() {
     let processId = await spawn({
         module: moduleId,
         scheduler: schedulerId,
+        tags: [{ name: "Name", value: name }],
         signer: signer
     })
 
     console.log(`Process created with ID: ${processId}`);
 }
 
-create();
+async function main() {
+    const args = process.argv;
+    const name = args[2];
+    if (name === undefined) {
+        console.error("Name is required");
+        return;
+    }
+    await create(name);
+}
+
+main();

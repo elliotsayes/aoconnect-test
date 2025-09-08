@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "generate-test-wallet": "mkdir -p .secret && npx @permaweb/wallet > .secret/test_wallet.json",
+    "aos-wallet": "aos --wallet .secret/test_wallet.json",
     "spawn": "tsx scripts/spawn.ts",
     "send": "tsx scripts/send.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
